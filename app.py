@@ -15,7 +15,10 @@ st.write("Current working directory:", os.getcwd())
 @st.cache_resource
 def load_model():
     try:
-        return joblib.load(r"D:\College\Semester 7\RAI\lab5\models\traffic_rf_model.pkl")
+        base_path = os.path.dirname(__file__)
+        model_path = os.path.join(base_path, "traffic_rf_model.pkl")
+        st.write("Loading model from:", model_path)
+        return joblib.load(model_path)
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
@@ -43,3 +46,4 @@ if uploaded_file is not None:
 
 else:
     st.info("Upload a CSV to get predictions.")
+
